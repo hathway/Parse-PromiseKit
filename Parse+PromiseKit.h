@@ -1,5 +1,5 @@
 //
-//  PromiseKit+Parse.h
+//  Parse+PromiseKit.h
 //
 //  Created by DJ Tarazona on 5/31/14.
 //  Copyright (c) 2014 Hathway Inc. All rights reserved.
