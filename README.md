@@ -13,6 +13,8 @@ with the same result signature as the appropriate completion block (with a few e
 
 `[object saveInBackground]` becomes `[object promiseSave]`
 
+`[user signUpInBackground]` becomes `[push promiseSignUp]`
+
 ```objc
 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     if (error) {
