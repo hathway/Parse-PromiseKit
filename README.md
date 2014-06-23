@@ -1,17 +1,19 @@
 Parse+PromiseKit
 ================
 `Parse+PromiseKit` is a category that adds [PromiseKit](http://promisekit.org/) integration to the
-[Parse iOS SDK](https://parse.com/docs/ios_guide).
+[Parse SDK](https://parse.com/docs/ios_guide).
 
 This category is a work-in-progress and still needs [proper](http://nshipster.com/documentation/)
 [documentation](http://promisekit.org/#adding-promises-to-third-party-libraries).
 
 Usage
 -----
-Method names prefix Parse's asyncronmous method names with `promise` and remove `InBackground`, etc. Promises are fulfilled
+Method names prefix Parse's asynchronous method names with `promise` and remove `InBackground`, etc. Promises are fulfilled
 with the same result signature as the appropriate completion block (with a few exceptions).
 
 `[object saveInBackground]` becomes `[object promiseSave]`
+
+`[user signUpInBackground]` becomes `[user promiseSignUp]`
 
 ```objc
 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
