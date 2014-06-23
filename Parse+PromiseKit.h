@@ -8,35 +8,35 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 
-@class Promise;
+@class PMKPromise;
 
 @interface PFAnonymousUtils (PromiseKit)
 
-+ (Promise *)promiseLogIn;
++ (PMKPromise *)promiseLogIn;
 
 @end
 
 
 @interface PFCloud (PromiseKit)
 
-+ (Promise *)promiseFunction:(NSString *)function withParameters:(NSDictionary *)parameters;
++ (PMKPromise *)promiseFunction:(NSString *)function withParameters:(NSDictionary *)parameters;
 
 @end
 
 
 @interface PFFile (PromiseKit)
 
-- (Promise *)promiseGetData;
-- (Promise *)promiseGetDataStream;
+- (PMKPromise *)promiseGetData;
+- (PMKPromise *)promiseGetDataStream;
 
-- (Promise *)promiseSave;
+- (PMKPromise *)promiseSave;
 
 @end
 
 
 @interface PFGeoPoint (PromiseKit)
 
-+ (Promise *)promiseGeoPointForCurrentLocation;
++ (PMKPromise *)promiseGeoPointForCurrentLocation;
 
 @end
 
@@ -44,93 +44,93 @@
 @interface PFObject (PromiseKit)
 
 #if PARSE_IOS_ONLY
-- (Promise *)promiseRefresh;
+- (PMKPromise *)promiseRefresh;
 #endif
 
-- (Promise *)promiseFetch;
-- (Promise *)promiseFetchIfNeeded;
-+ (Promise *)promiseFetchAll:(NSArray *)objects;
-+ (Promise *)promiseFetchAllIfNeeded:(NSArray *)objects;
+- (PMKPromise *)promiseFetch;
+- (PMKPromise *)promiseFetchIfNeeded;
++ (PMKPromise *)promiseFetchAll:(NSArray *)objects;
++ (PMKPromise *)promiseFetchAllIfNeeded:(NSArray *)objects;
 
-- (Promise *)promiseSave;
-+ (Promise *)promiseSaveAll:(NSArray *)objects;
+- (PMKPromise *)promiseSave;
++ (PMKPromise *)promiseSaveAll:(NSArray *)objects;
 
-- (Promise *)promiseDelete;
-+ (Promise *)promiseDeleteAll:(NSArray *)objects;
+- (PMKPromise *)promiseDelete;
++ (PMKPromise *)promiseDeleteAll:(NSArray *)objects;
 
 @end
 
 
 @interface PFQuery (PromiseKit)
 
-+ (Promise *)promiseGetObjectOfClass:(NSString *)objectClass objectId:(NSString *)objectId;
-- (Promise *)promiseGetObjectWithId:(NSString *)objectId;
-+ (Promise *)promiseGetUserObjectWithId:(NSString *)objectId;
-- (Promise *)promiseFindObjects;
-- (Promise *)promiseGetFirstObject;
-- (Promise *)promiseCountObjects;
++ (PMKPromise *)promiseGetObjectOfClass:(NSString *)objectClass objectId:(NSString *)objectId;
+- (PMKPromise *)promiseGetObjectWithId:(NSString *)objectId;
++ (PMKPromise *)promiseGetUserObjectWithId:(NSString *)objectId;
+- (PMKPromise *)promiseFindObjects;
+- (PMKPromise *)promiseGetFirstObject;
+- (PMKPromise *)promiseCountObjects;
 
 @end
 
 
 @interface PFUser (PromiseKit)
 
-- (Promise *)promiseSignUp;
-+ (Promise *)promiseBecome:(NSString *)sessionToken;
-+ (Promise *)promiseLogInWithUsername:(NSString *)username password:(NSString *)password;
-+ (Promise *)promiseRequestPasswordResetForEmail:(NSString *)email;
+- (PMKPromise *)promiseSignUp;
++ (PMKPromise *)promiseBecome:(NSString *)sessionToken;
++ (PMKPromise *)promiseLogInWithUsername:(NSString *)username password:(NSString *)password;
++ (PMKPromise *)promiseRequestPasswordResetForEmail:(NSString *)email;
 
 @end
 
 #if PARSE_IOS_ONLY
 @interface PFImageView (PromiseKit)
 
-- (Promise *)promiseLoad;
+- (PMKPromise *)promiseLoad;
 
 @end
 
 
 @interface PFPurchase (PromiseKit)
 
-+ (Promise *)promiseBuyProduct:(NSString *)productIdentifier;
-+ (Promise *)promiseDownloadAssetForTransaction:(SKPaymentTransaction *)transaction;
++ (PMKPromise *)promiseBuyProduct:(NSString *)productIdentifier;
++ (PMKPromise *)promiseDownloadAssetForTransaction:(SKPaymentTransaction *)transaction;
 
 @end
 
 
 @interface PFPush (PromiseKit)
 
-+ (Promise *)promiseSendPushMessageToChannel:(NSString *)channel withMessage:(NSString *)message;
-+ (Promise *)promiseSendPushMessageToQuery:(PFQuery *)query withMessage:(NSString *)message;
++ (PMKPromise *)promiseSendPushMessageToChannel:(NSString *)channel withMessage:(NSString *)message;
++ (PMKPromise *)promiseSendPushMessageToQuery:(PFQuery *)query withMessage:(NSString *)message;
 
-- (Promise *)promiseSendPush;
+- (PMKPromise *)promiseSendPush;
 
-+ (Promise *)promiseSendPushDataToChannel:(NSString *)channel withData:(NSDictionary *)data;
-+ (Promise *)promiseSendPushDataToQuery:(PFQuery *)query withData:(NSDictionary *)data;
++ (PMKPromise *)promiseSendPushDataToChannel:(NSString *)channel withData:(NSDictionary *)data;
++ (PMKPromise *)promiseSendPushDataToQuery:(PFQuery *)query withData:(NSDictionary *)data;
 
-+ (Promise *)promiseGetSubscribedChannels;
-+ (Promise *)promiseSubscribeToChannel:(NSString *)channel;
-+ (Promise *)promiseUnsubscribeFromChannel:(NSString *)channel;
++ (PMKPromise *)promiseGetSubscribedChannels;
++ (PMKPromise *)promiseSubscribeToChannel:(NSString *)channel;
++ (PMKPromise *)promiseUnsubscribeFromChannel:(NSString *)channel;
 
 @end
 
 
 @interface PFTwitterUtils (PromiseKit)
 
-+ (Promise *)promiseLogIn;
-+ (Promise *)promiseLogInWithTwitterId:(NSString *)twitterId
++ (PMKPromise *)promiseLogIn;
++ (PMKPromise *)promiseLogInWithTwitterId:(NSString *)twitterId
                             screenName:(NSString *)screenName
                              authToken:(NSString *)authToken
                        authTokenSecret:(NSString *)authTokenSecret;
 
-+ (Promise *)promiseLinkUser:(PFUser *)user;
-+ (Promise *)promiseLinkUser:(PFUser *)user
++ (PMKPromise *)promiseLinkUser:(PFUser *)user;
++ (PMKPromise *)promiseLinkUser:(PFUser *)user
                    twitterId:(NSString *)twitterId
                   screenName:(NSString *)screenName
                    authToken:(NSString *)authToken
              authTokenSecret:(NSString *)authTokenSecret;
 
-+ (Promise *)promiseUnlinkUser:(PFUser *)user;
++ (PMKPromise *)promiseUnlinkUser:(PFUser *)user;
 
 @end
 
@@ -138,20 +138,20 @@
 #if __has_include(<PFFacebookUtils.h>)
 @interface PFFacebookUtils (PromiseKit)
 
-+ (Promise *)promiseLogInWithPermissions:(NSArray *)permissions;
-+ (Promise *)promiseLogInWithFacebookId:(NSString *)facebookId
++ (PMKPromise *)promiseLogInWithPermissions:(NSArray *)permissions;
++ (PMKPromise *)promiseLogInWithFacebookId:(NSString *)facebookId
                             accessToken:(NSString *)accessToken
                          expirationDate:(NSDate *)expirationDate;
 
-+ (Promise *)promiseLinkUser:(PFUser *)user permissions:(NSArray *)permissions;
-+ (Promise *)promiseLinkUser:(PFUser *)user
++ (PMKPromise *)promiseLinkUser:(PFUser *)user permissions:(NSArray *)permissions;
++ (PMKPromise *)promiseLinkUser:(PFUser *)user
                   facebookId:(NSString *)facebookId
                  accessToken:(NSString *)accessToken
               expirationDate:(NSDate *)expirationDate;
 
-+ (Promise *)promiseUnlinkUser:(PFUser *)user;
++ (PMKPromise *)promiseUnlinkUser:(PFUser *)user;
 
-+ (Promise *)promiseReauthorizeUser:(PFUser *)user
++ (PMKPromise *)promiseReauthorizeUser:(PFUser *)user
              withPublishPermissions:(NSArray *)permissions
                            audience:(FBSessionDefaultAudience)audience;
 

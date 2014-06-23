@@ -8,8 +8,8 @@
 #import "Parse+PromiseKit.h"
 #import <Promise.h>
 
-#ifndef PKPFBooleanResultBlock
-#define PKPFBooleanResultBlock \
+#ifndef PMKPFBooleanResultBlock
+#define PMKPFBooleanResultBlock \
 ^(BOOL succeeded, NSError *error) { \
     if (error) { \
         rejecter(error); \
@@ -20,8 +20,8 @@
 }
 #endif
 
-#ifndef PKPFBooleanResultBlockSelf
-#define PKPFBooleanResultBlockSelf \
+#ifndef PMKPFBooleanResultBlockSelf
+#define PMKPFBooleanResultBlockSelf \
 ^(BOOL succeeded, NSError *error) { \
     if (error) { \
         rejecter(error); \
@@ -32,8 +32,8 @@
 }
 #endif
 
-#ifndef PKPFBooleanResultBlockArray
-#define PKPFBooleanResultBlockArray \
+#ifndef PMKPFBooleanResultBlockArray
+#define PMKPFBooleanResultBlockArray \
 ^(BOOL succeeded, NSError *error) { \
     if (error) { \
         rejecter(error); \
@@ -44,8 +44,8 @@
 }
 #endif
 
-#ifndef PKPFIntegerResultBlock
-#define PKPFIntegerResultBlock \
+#ifndef PMKPFIntegerResultBlock
+#define PMKPFIntegerResultBlock \
 ^(int number, NSError *error) { \
     if (error) { \
         rejecter(error); \
@@ -56,8 +56,8 @@
 }
 #endif
 
-#ifndef PKPFArrayResultBlock
-#define PKPFArrayResultBlock \
+#ifndef PMKPFArrayResultBlock
+#define PMKPFArrayResultBlock \
 ^(NSArray *objects, NSError *error) { \
     if (error) { \
         rejecter(error); \
@@ -68,8 +68,8 @@
 }
 #endif
 
-#ifndef PKPFObjectResultBlock
-#define PKPFObjectResultBlock \
+#ifndef PMKPFObjectResultBlock
+#define PMKPFObjectResultBlock \
 ^(PFObject *object, NSError *error) { \
     if (error) { \
         rejecter(error); \
@@ -80,8 +80,8 @@
 }
 #endif
 
-#ifndef PKPFSetResultBlock
-#define PKPFSetResultBlock \
+#ifndef PMKPFSetResultBlock
+#define PMKPFSetResultBlock \
 ^(NSSet *channels, NSError *error) { \
     if (error) { \
         rejecter(error); \
@@ -92,8 +92,8 @@
 }
 #endif
 
-#ifndef PKPFUserResultBlock
-#define PKPFUserResultBlock \
+#ifndef PMKPFUserResultBlock
+#define PMKPFUserResultBlock \
 ^(PFUser *user, NSError *error) { \
     if (error) { \
         rejecter(error); \
@@ -104,8 +104,8 @@
 }
 #endif
 
-#ifndef PKPFDataResultBlock
-#define PKPFDataResultBlock \
+#ifndef PMKPFDataResultBlock
+#define PMKPFDataResultBlock \
 ^(NSData *data, NSError *error) { \
     if (error) { \
         rejecter(error); \
@@ -116,8 +116,8 @@
 }
 #endif
 
-#ifndef PKPFDataStreamResultBlock
-#define PKPFDataStreamResultBlock \
+#ifndef PMKPFDataStreamResultBlock
+#define PMKPFDataStreamResultBlock \
 ^(NSInputStream *stream, NSError *error) { \
     if (error) { \
         rejecter(error); \
@@ -128,8 +128,8 @@
 }
 #endif
 
-#ifndef PKPFStringResultBlock
-#define PKPFStringResultBlock \
+#ifndef PMKPFStringResultBlock
+#define PMKPFStringResultBlock \
 ^(NSString *string, NSError *error) { \
     if (error) { \
         rejecter(error); \
@@ -140,8 +140,8 @@
 }
 #endif
 
-#ifndef PKPFIdResultBlock
-#define PKPFIdResultBlock \
+#ifndef PMKPFIdResultBlock
+#define PMKPFIdResultBlock \
 ^(id object, NSError *error) { \
     if (error) { \
         rejecter(error); \
@@ -154,10 +154,10 @@
 
 @implementation PFAnonymousUtils (PromiseKit)
 
-+ (Promise *)promiseLogIn
++ (PMKPromise *)promiseLogIn
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self logInWithBlock:PKPFUserResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self logInWithBlock:PMKPFUserResultBlock];
     }];
 }
 
@@ -166,10 +166,10 @@
 
 @implementation PFCloud (PromiseKit)
 
-+ (Promise *)promiseFunction:(NSString *)function withParameters:(NSDictionary *)parameters
++ (PMKPromise *)promiseFunction:(NSString *)function withParameters:(NSDictionary *)parameters
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [PFCloud callFunctionInBackground:function withParameters:parameters block:PKPFIdResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [PFCloud callFunctionInBackground:function withParameters:parameters block:PMKPFIdResultBlock];
     }];
 }
 
@@ -178,24 +178,24 @@
 
 @implementation PFFile (PromiseKit)
 
-- (Promise *)promiseGetData
+- (PMKPromise *)promiseGetData
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self getDataInBackgroundWithBlock:PKPFDataResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self getDataInBackgroundWithBlock:PMKPFDataResultBlock];
     }];
 }
 
-- (Promise *)promiseGetDataStream
+- (PMKPromise *)promiseGetDataStream
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self getDataStreamInBackgroundWithBlock:PKPFDataStreamResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self getDataStreamInBackgroundWithBlock:PMKPFDataStreamResultBlock];
     }];
 }
 
-- (Promise *)promiseSave
+- (PMKPromise *)promiseSave
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self saveInBackgroundWithBlock:PKPFBooleanResultBlockSelf];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self saveInBackgroundWithBlock:PMKPFBooleanResultBlockSelf];
     }];
 }
 
@@ -204,9 +204,9 @@
 
 @implementation PFGeoPoint (PromiseKit)
 
-+ (Promise *)promiseGeoPointForCurrentLocation
++ (PMKPromise *)promiseGeoPointForCurrentLocation
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
         [self geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
             if (error) {
                 rejecter(error);
@@ -224,67 +224,67 @@
 @implementation PFObject (PromiseKit)
 
 #if PARSE_IOS_ONLY
-- (Promise *)promiseRefresh
+- (PMKPromise *)promiseRefresh
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self refreshInBackgroundWithBlock:PKPFObjectResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self refreshInBackgroundWithBlock:PMKPFObjectResultBlock];
     }];
 }
 #endif
 
-- (Promise *)promiseFetch
+- (PMKPromise *)promiseFetch
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self fetchInBackgroundWithBlock:PKPFObjectResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self fetchInBackgroundWithBlock:PMKPFObjectResultBlock];
     }];
 }
 
-- (Promise *)promiseFetchIfNeeded
+- (PMKPromise *)promiseFetchIfNeeded
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self fetchIfNeededInBackgroundWithBlock:PKPFObjectResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self fetchIfNeededInBackgroundWithBlock:PMKPFObjectResultBlock];
     }];
 }
 
-+ (Promise *)promiseFetchAll:(NSArray *)objects
++ (PMKPromise *)promiseFetchAll:(NSArray *)objects
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self fetchAllInBackground:objects block:PKPFArrayResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self fetchAllInBackground:objects block:PMKPFArrayResultBlock];
     }];
 }
 
-+ (Promise *)promiseFetchAllIfNeeded:(NSArray *)objects
++ (PMKPromise *)promiseFetchAllIfNeeded:(NSArray *)objects
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self fetchAllIfNeededInBackground:objects block:PKPFArrayResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self fetchAllIfNeededInBackground:objects block:PMKPFArrayResultBlock];
     }];
 }
 
-- (Promise *)promiseSave
+- (PMKPromise *)promiseSave
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self saveInBackgroundWithBlock:PKPFBooleanResultBlockSelf];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self saveInBackgroundWithBlock:PMKPFBooleanResultBlockSelf];
     }];
 }
 
-+ (Promise *)promiseSaveAll:(NSArray *)objects
++ (PMKPromise *)promiseSaveAll:(NSArray *)objects
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self saveAllInBackground:objects block:PKPFBooleanResultBlockArray];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self saveAllInBackground:objects block:PMKPFBooleanResultBlockArray];
     }];
 }
 
-- (Promise *)promiseDelete
+- (PMKPromise *)promiseDelete
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self deleteInBackgroundWithBlock:PKPFBooleanResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self deleteInBackgroundWithBlock:PMKPFBooleanResultBlock];
     }];
 }
 
-+ (Promise *)promiseDeleteAll:(NSArray *)objects
++ (PMKPromise *)promiseDeleteAll:(NSArray *)objects
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self deleteAllInBackground:objects block:PKPFBooleanResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self deleteAllInBackground:objects block:PMKPFBooleanResultBlock];
     }];
 }
 
@@ -293,7 +293,7 @@
 
 @implementation PFQuery (PromiseKit)
 
-+ (Promise *)promiseGetObjectOfClass:(NSString *)objectClass objectId:(NSString *)objectId
++ (PMKPromise *)promiseGetObjectOfClass:(NSString *)objectClass objectId:(NSString *)objectId
 {
     return dispatch_promise(^id {
         NSError *error = nil;
@@ -305,14 +305,14 @@
     });
 }
 
-- (Promise *)promiseGetObjectWithId:(NSString *)objectId
+- (PMKPromise *)promiseGetObjectWithId:(NSString *)objectId
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self getObjectInBackgroundWithId:objectId block:PKPFObjectResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self getObjectInBackgroundWithId:objectId block:PMKPFObjectResultBlock];
     }];
 }
 
-+ (Promise *)promiseGetUserObjectWithId:(NSString *)objectId
++ (PMKPromise *)promiseGetUserObjectWithId:(NSString *)objectId
 {
     return dispatch_promise(^id {
         NSError *error = nil;
@@ -324,24 +324,24 @@
     });
 }
 
-- (Promise *)promiseFindObjects
+- (PMKPromise *)promiseFindObjects
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self findObjectsInBackgroundWithBlock:PKPFArrayResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self findObjectsInBackgroundWithBlock:PMKPFArrayResultBlock];
     }];
 }
 
-- (Promise *)promiseGetFirstObject
+- (PMKPromise *)promiseGetFirstObject
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self getFirstObjectInBackgroundWithBlock:PKPFObjectResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self getFirstObjectInBackgroundWithBlock:PMKPFObjectResultBlock];
     }];
 }
 
-- (Promise *)promiseCountObjects
+- (PMKPromise *)promiseCountObjects
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self countObjectsInBackgroundWithBlock:PKPFIntegerResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self countObjectsInBackgroundWithBlock:PMKPFIntegerResultBlock];
     }];
 }
 
@@ -350,30 +350,30 @@
 
 @implementation PFUser (PromiseKit)
 
-- (Promise *)promiseSignUp
+- (PMKPromise *)promiseSignUp
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self signUpInBackgroundWithBlock:PKPFBooleanResultBlockSelf];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self signUpInBackgroundWithBlock:PMKPFBooleanResultBlockSelf];
     }];
 }
 
-+ (Promise *)promiseBecome:(NSString *)sessionToken
++ (PMKPromise *)promiseBecome:(NSString *)sessionToken
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self becomeInBackground:sessionToken block:PKPFUserResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self becomeInBackground:sessionToken block:PMKPFUserResultBlock];
     }];
 }
 
-+ (Promise *)promiseLogInWithUsername:(NSString *)username password:(NSString *)password
++ (PMKPromise *)promiseLogInWithUsername:(NSString *)username password:(NSString *)password
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self logInWithUsernameInBackground:username password:password block:PKPFUserResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self logInWithUsernameInBackground:username password:password block:PMKPFUserResultBlock];
     }];
 }
 
-+ (Promise *)promiseRequestPasswordResetForEmail:(NSString *)email
++ (PMKPromise *)promiseRequestPasswordResetForEmail:(NSString *)email
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
         [self requestPasswordResetForEmailInBackground:email block:^(BOOL succeeded, NSError *error) {
             if (error) {
                 rejecter(error);
@@ -391,9 +391,9 @@
 #if PARSE_IOS_ONLY
 @implementation PFImageView (PromiseKit)
 
-- (Promise *)promiseLoad
+- (PMKPromise *)promiseLoad
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
         [self loadInBackground:^(UIImage *image, NSError *error) {
             if (error) {
                 rejecter(error);
@@ -410,9 +410,9 @@
 
 @implementation PFPurchase (PromiseKit)
 
-+ (Promise *)promiseBuyProduct:(NSString *)productIdentifier
++ (PMKPromise *)promiseBuyProduct:(NSString *)productIdentifier
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
         [self buyProduct:productIdentifier block:^(NSError *error) {
             if (error) {
                 rejecter(error);
@@ -424,10 +424,10 @@
     }];
 }
 
-+ (Promise *)promiseDownloadAssetForTransaction:(SKPaymentTransaction *)transaction
++ (PMKPromise *)promiseDownloadAssetForTransaction:(SKPaymentTransaction *)transaction
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self downloadAssetForTransaction:transaction completion:PKPFStringResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self downloadAssetForTransaction:transaction completion:PMKPFStringResultBlock];
     }];
 }
 
@@ -436,59 +436,59 @@
 
 @implementation PFPush (PromiseKit)
 
-+ (Promise *)promiseSendPushMessageToChannel:(NSString *)channel withMessage:(NSString *)message
++ (PMKPromise *)promiseSendPushMessageToChannel:(NSString *)channel withMessage:(NSString *)message
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self sendPushMessageToChannelInBackground:channel withMessage:message block:PKPFBooleanResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self sendPushMessageToChannelInBackground:channel withMessage:message block:PMKPFBooleanResultBlock];
     }];
 }
 
-+ (Promise *)promiseSendPushMessageToQuery:(PFQuery *)query withMessage:(NSString *)message
++ (PMKPromise *)promiseSendPushMessageToQuery:(PFQuery *)query withMessage:(NSString *)message
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self sendPushMessageToQueryInBackground:query withMessage:message block:PKPFBooleanResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self sendPushMessageToQueryInBackground:query withMessage:message block:PMKPFBooleanResultBlock];
     }];
 }
 
-- (Promise *)promiseSendPush
+- (PMKPromise *)promiseSendPush
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self sendPushInBackgroundWithBlock:PKPFBooleanResultBlockSelf];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self sendPushInBackgroundWithBlock:PMKPFBooleanResultBlockSelf];
     }];
 }
 
-+ (Promise *)promiseSendPushDataToChannel:(NSString *)channel withData:(NSDictionary *)data
++ (PMKPromise *)promiseSendPushDataToChannel:(NSString *)channel withData:(NSDictionary *)data
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self sendPushDataToChannelInBackground:channel withData:data block:PKPFBooleanResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self sendPushDataToChannelInBackground:channel withData:data block:PMKPFBooleanResultBlock];
     }];
 }
 
-+ (Promise *)promiseSendPushDataToQuery:(PFQuery *)query withData:(NSDictionary *)data
++ (PMKPromise *)promiseSendPushDataToQuery:(PFQuery *)query withData:(NSDictionary *)data
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self sendPushDataToQueryInBackground:query withData:data block:PKPFBooleanResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self sendPushDataToQueryInBackground:query withData:data block:PMKPFBooleanResultBlock];
     }];
 }
 
-+ (Promise *)promiseGetSubscribedChannels
++ (PMKPromise *)promiseGetSubscribedChannels
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self getSubscribedChannelsInBackgroundWithBlock:PKPFSetResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self getSubscribedChannelsInBackgroundWithBlock:PMKPFSetResultBlock];
     }];
 }
 
-+ (Promise *)promiseSubscribeToChannel:(NSString *)channel
++ (PMKPromise *)promiseSubscribeToChannel:(NSString *)channel
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self subscribeToChannelInBackground:channel block:PKPFBooleanResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self subscribeToChannelInBackground:channel block:PMKPFBooleanResultBlock];
     }];
 }
 
-+ (Promise *)promiseUnsubscribeFromChannel:(NSString *)channel
++ (PMKPromise *)promiseUnsubscribeFromChannel:(NSString *)channel
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self unsubscribeFromChannelInBackground:channel block:PKPFBooleanResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self unsubscribeFromChannelInBackground:channel block:PMKPFBooleanResultBlock];
     }];
 }
 
@@ -497,54 +497,54 @@
 
 @implementation PFTwitterUtils (PromiseKit)
 
-+ (Promise *)promiseLogIn
++ (PMKPromise *)promiseLogIn
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self logInWithBlock:PKPFUserResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self logInWithBlock:PMKPFUserResultBlock];
     }];
 }
 
-+ (Promise *)promiseLogInWithTwitterId:(NSString *)twitterId
++ (PMKPromise *)promiseLogInWithTwitterId:(NSString *)twitterId
                             screenName:(NSString *)screenName
                              authToken:(NSString *)authToken
                        authTokenSecret:(NSString *)authTokenSecret
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
         [self logInWithTwitterId:twitterId
                       screenName:screenName
                        authToken:authToken
                  authTokenSecret:authTokenSecret
-                           block:PKPFUserResultBlock];
+                           block:PMKPFUserResultBlock];
     }];
 }
 
-+ (Promise *)promiseLinkUser:(PFUser *)user
++ (PMKPromise *)promiseLinkUser:(PFUser *)user
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self linkUser:user block:PKPFBooleanResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self linkUser:user block:PMKPFBooleanResultBlock];
     }];
 }
 
-+ (Promise *)promiseLinkUser:(PFUser *)user
++ (PMKPromise *)promiseLinkUser:(PFUser *)user
                    twitterId:(NSString *)twitterId
                   screenName:(NSString *)screenName
                    authToken:(NSString *)authToken
              authTokenSecret:(NSString *)authTokenSecret
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
         [self linkUser:user
              twitterId:twitterId
             screenName:screenName
              authToken:authToken
        authTokenSecret:authTokenSecret
-                 block:PKPFBooleanResultBlock];
+                 block:PMKPFBooleanResultBlock];
     }];
 }
 
-+ (Promise *)promiseUnlinkUser:(PFUser *)user
++ (PMKPromise *)promiseUnlinkUser:(PFUser *)user
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self unlinkUserInBackground:user block:PKPFBooleanResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self unlinkUserInBackground:user block:PMKPFBooleanResultBlock];
     }];
 }
 
@@ -554,62 +554,62 @@
 #if __has_include(<PFFacebookUtils.h>)
 @implementation PFFacebookUtils (PromiseKit)
 
-+ (Promise *)promiseLogInWithPermissions:(NSArray *)permissions
++ (PMKPromise *)promiseLogInWithPermissions:(NSArray *)permissions
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self logInWithPermissions:permissions block:PKPFUserResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self logInWithPermissions:permissions block:PMKPFUserResultBlock];
     }];
 }
 
-+ (Promise *)promiseLogInWithFacebookId:(NSString *)facebookId
++ (PMKPromise *)promiseLogInWithFacebookId:(NSString *)facebookId
                             accessToken:(NSString *)accessToken
                          expirationDate:(NSDate *)expirationDate
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
         [self logInWithFacebookId:facebookId
                       accessToken:accessToken
                    expirationDate:expirationDate
-                            block:PKPFUserResultBlock];
+                            block:PMKPFUserResultBlock];
     }];
 }
 
-+ (Promise *)promiseLinkUser:(PFUser *)user permissions:(NSArray *)permissions
++ (PMKPromise *)promiseLinkUser:(PFUser *)user permissions:(NSArray *)permissions
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self linkUser:user permissions:permissions block:PKPFBooleanResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self linkUser:user permissions:permissions block:PMKPFBooleanResultBlock];
     }];
 }
 
-+ (Promise *)promiseLinkUser:(PFUser *)user
++ (PMKPromise *)promiseLinkUser:(PFUser *)user
                   facebookId:(NSString *)facebookId
                  accessToken:(NSString *)accessToken
               expirationDate:(NSDate *)expirationDate
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
         [self linkUser:user
             facebookId:facebookId
            accessToken:accessToken
         expirationDate:expirationDate
-                 block:PKPFBooleanResultBlock];
+                 block:PMKPFBooleanResultBlock];
     }];
 }
 
-+ (Promise *)promiseUnlinkUser:(PFUser *)user
++ (PMKPromise *)promiseUnlinkUser:(PFUser *)user
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
-        [self unlinkUserInBackground:user block:PKPFBooleanResultBlock];
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
+        [self unlinkUserInBackground:user block:PMKPFBooleanResultBlock];
     }];
 }
 
-+ (Promise *)promiseReauthorizeUser:(PFUser *)user
++ (PMKPromise *)promiseReauthorizeUser:(PFUser *)user
              withPublishPermissions:(NSArray *)permissions
                            audience:(FBSessionDefaultAudience)audience
 {
-    return [Promise new:^(PromiseFulfiller fulfiller, PromiseRejecter rejecter) {
+    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
         [self reauthorizeUser:user
        withPublishPermissions:permissions
                      audience:audience
-                        block:PKPFBooleanResultBlock];
+                        block:PMKPFBooleanResultBlock];
     }];
 }
 
