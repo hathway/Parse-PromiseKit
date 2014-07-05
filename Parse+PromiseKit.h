@@ -5,6 +5,7 @@
 //  Copyright (c) 2014 Hathway Inc.
 //
 
+#import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 
 @class PMKPromise;
@@ -370,7 +371,7 @@
 @end
 
 #if defined(__has_include)
-#if __has_include(<PFFacebookUtils.h>)
+#if __has_include(<Parse/PFFacebookUtils.h>)
 @interface PFFacebookUtils (PromiseKit)
 
 /**

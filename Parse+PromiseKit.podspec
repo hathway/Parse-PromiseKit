@@ -25,6 +25,8 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Parse+PromiseKit.{h,m}'
 
+  s.frameworks = 'Foundation'
+
   s.dependency 'PromiseKit/base'
   s.dependency 'Parse', '~> 1.2'
 
