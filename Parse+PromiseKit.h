@@ -5,7 +5,6 @@
 //  Copyright (c) 2014 Hathway Inc.
 //
 
-#import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 
 @class PMKPromise;
