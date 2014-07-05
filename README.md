@@ -3,6 +3,8 @@ Parse+PromiseKit
 `Parse+PromiseKit` is a category that adds [PromiseKit](http://promisekit.org/) integration to the
 [Parse SDK](https://parse.com/docs/ios_guide).
 
+*Note: The API is subject to change until v1.0.*
+
 Usage
 -----
 Method names prefix Parse's asynchronous method names with `promise` and remove `InBackground`, etc. Promises are fulfilled
