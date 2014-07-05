@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Parse/Parse.h>
+#import <Parse.h>
 
 @class PMKPromise;
 

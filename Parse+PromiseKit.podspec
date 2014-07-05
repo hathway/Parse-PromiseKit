@@ -18,8 +18,8 @@ Pod::Spec.new do |s|
   s.authors          = { 'DJ Tarazona' => 'dj@wearehathway.com', 'HATHWAY' => 'hello@wearehathway.com' }
   s.social_media_url = 'https://twitter.com/weareHATHWAY'
 
-  s.ios.deployment_target = '5.0'
-  s.osx.deployment_target = '10.7'
+  s.ios.deployment_target = '5.0'  # Parse-iOS-SDK minimal supported iOS version
+  s.osx.deployment_target = '10.8' # Parse-OSX-SDK minimal supported OS X version
 
   s.requires_arc = true
 
@@ -28,7 +28,9 @@ Pod::Spec.new do |s|
   s.frameworks = 'Foundation'
 
   s.dependency 'PromiseKit/base'
-  s.dependency 'Parse', '~> 1.2'
+  s.ios.dependency 'Parse-iOS-SDK', '~> 1.2'
+  s.osx.dependency 'Parse-OSX-SDK', '~> 1.2'
 
-  s.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '"$(PODS_ROOT)/Parse"' }
+  s.ios.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '"$(PODS_ROOT)/Parse-iOS-SDK"' }
+  s.osx.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '"$(PODS_ROOT)/Parse-OSX-SDK"' }
 end
