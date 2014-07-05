@@ -277,14 +277,14 @@
 - (PMKPromise *)promiseDelete
 {
     return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
-        [self deleteInBackgroundWithBlock:PMKPFBooleanResultBlock];
+        [self deleteInBackgroundWithBlock:PMKPFBooleanResultBlockSelf];
     }];
 }
 
 + (PMKPromise *)promiseDeleteAll:(NSArray *)objects
 {
     return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
-        [self deleteAllInBackground:objects block:PMKPFBooleanResultBlock];
+        [self deleteAllInBackground:objects block:PMKPFBooleanResultBlockArray];
     }];
 }
 

@@ -12,6 +12,10 @@
 
 @interface PFAnonymousUtils (PromiseKit)
 
+/**
+ Creates an anonymous user. Thens the `PFUser *`.
+ @return A Promise that thens `PFUser *user`
+ */
 + (PMKPromise *)promiseLogIn;
 
 @end
@@ -19,6 +23,12 @@
 
 @interface PFCloud (PromiseKit)
 
+/**
+ Calls the given cloud function with the parameters passed in. Thens the result `id` object.
+ @param function The function name to call.
+ @param parameters The parameters to send to the function. Cannot be nil.
+ @return A Promise that thens `id object`
+ */
 + (PMKPromise *)promiseFunction:(NSString *)function withParameters:(NSDictionary *)parameters;
 
 @end
@@ -26,9 +36,24 @@
 
 @interface PFFile (PromiseKit)
 
+/**
+ Gets the data from cache if available or fetches its contents from the Parse servers. Thens the
+ `NSData *`.
+ @return A Promise that thens `NSData *data`
+ */
 - (PMKPromise *)promiseGetData;
+/**
+ This method is like promiseGetData but avoids ever holding the entire PFFile's contents in memory
+ at once. This can help applications with many large PFFiles avoid memory warnings. Thens an
+ `NSInputStream *` containing the data.
+ @return A Promise that thens `NSInputStream *stream`
+ */
 - (PMKPromise *)promiseGetDataStream;
 
+/**
+ Saves the file. Thens the saved `PFFile *`.
+ @return A Promise that thens `PFFile *file`
+ */
 - (PMKPromise *)promiseSave;
 
 @end
@@ -36,6 +61,10 @@
 
 @interface PFGeoPoint (PromiseKit)
 
+/**
+ Fetches the user's current location. Thens the `PFGeoPoint *`.
+ @return A Promise that thens `PFGeoPoint *`
+ */
 + (PMKPromise *)promiseGeoPointForCurrentLocation;
 
 @end
@@ -44,18 +73,60 @@
 @interface PFObject (PromiseKit)
 
 #if PARSE_IOS_ONLY
+/**
+ Refreshes the PFObject with the current data from the server. Thens the refreshed `PFObject *`.
+ @return A Promise that thens `PFObject *object`
+ */
 - (PMKPromise *)promiseRefresh;
 #endif
 
+/**
+ Fetches the PFObject with the current data from the server. Thens the fetched `PFObject *`.
+ @return A Promise that thens `PFObject *object`
+ */
 - (PMKPromise *)promiseFetch;
+/**
+ Fetches the PFObject's data from the server if isDataAvailable is false. Thens the fetched `PFObject *`.
+ @return A Promise that thens `PFObject *object`
+ */
 - (PMKPromise *)promiseFetchIfNeeded;
+/**
+ Fetches all of the PFObjects with the current data from the server. Thens an `NSArray *` of the
+ fetched `PFObject *`s.
+ @param objects The list of objects to fetch
+ @return A Promise that thens an `NSArray *array` of `PFObject *object`s
+ */
 + (PMKPromise *)promiseFetchAll:(NSArray *)objects;
+/**
+ Fetches all of the PFObjects with the current data from the server if isDataAvailable is false.
+ Thens an `NSArray *` of the fetched `PFObject *`s.
+ @param objects The list of objects to fetch
+ @return A Promise that thens an `NSArray *array` of `PFObject *object`s
+ */
 + (PMKPromise *)promiseFetchAllIfNeeded:(NSArray *)objects;
 
+/**
+ Saves the PFObject. Thens the saved `PFObject *`.
+ @return A Promise that thens `PFObject *object`
+ */
 - (PMKPromise *)promiseSave;
+/**
+ Saves a collection of objects all at once. Thens an `NSArray *` of the saved `PFObject *`s.
+ @param objects The array of objects to save
+ @return A Promise that thens an `NSArray *array` of `PFObject *object`s
+ */
 + (PMKPromise *)promiseSaveAll:(NSArray *)objects;
 
+/**
+ Deletes the PFObject. Thens the deleted `PFObject *`.
+ @return A Promise that thens `PFObject *object`
+ */
 - (PMKPromise *)promiseDelete;
+/**
+ Deletes a collection of objects all at once. Thens an `NSArray *` of the deleted `PFObject *`s.
+ @param objects The array of objects to delete
+ @return A Promise that thens an `NSArray *array` of `PFObject *object`s
+ */
 + (PMKPromise *)promiseDeleteAll:(NSArray *)objects;
 
 @end
@@ -63,11 +134,43 @@
 
 @interface PFQuery (PromiseKit)
 
+/**
+ Gets the PFObject with the given class and id. Thens the fetched `PFObject *`.
+ @param objectClass The class name for the object that is being requested
+ @param objectId The id of the object that is being requested
+ @return A Promise that thens `PFObject *object`
+ */
 + (PMKPromise *)promiseGetObjectOfClass:(NSString *)objectClass objectId:(NSString *)objectId;
+/**
+ Gets the PFObject with the given id. Thens the fetched `PFObject *`.
+ @param objectId The id of the object that is being requested
+ @return A Promise that thens `PFObject *object`
+ */
 - (PMKPromise *)promiseGetObjectWithId:(NSString *)objectId;
+/**
+ Gets the PFUser with the given id. Thens the fetched `PFUser *`.
+ @param objectId The id of the user that is being requested
+ @return A Promise that thens `PFUser *user`
+ */
 + (PMKPromise *)promiseGetUserObjectWithId:(NSString *)objectId;
+
+/**
+ Finds objects based on the constructed query. Thens an `NSArray *` of the found `PFObject *`s.
+ @return A Promise that thens an `NSArray *array` of `PFObject *object`s
+ */
 - (PMKPromise *)promiseFindObjects;
+/**
+ Gets the first object based on the constructed query. Thens the fetched `PFObject *`.
+
+ This mutates the PFQuery.
+ @return A Promise that thens `PFObject *object`
+ */
 - (PMKPromise *)promiseGetFirstObject;
+
+/**
+ Counts objects based on the constructed query. Thens the `NSNumber *` count.
+ @return A Promise that thens `NSNumber *number`
+ */
 - (PMKPromise *)promiseCountObjects;
 
 @end
@@ -75,9 +178,36 @@
 
 @interface PFUser (PromiseKit)
 
+/**
+ Signs up the user. Make sure that password and username are set. This will also enforce that the
+ username isn't already taken. Thens the `PFUser *`.
+ @return A Promise that thens `PFUser *user`
+ */
 - (PMKPromise *)promiseSignUp;
+/**
+ Makes a request to become a user with the given session token. Thens the successfully logged in
+ `PFUser *`. This also caches the user locally so that calls to currentUser will use the latest
+ logged in user.
+ @param sessionToken The session token for the user
+ @return A Promise that thens `PFUser *user`
+ */
 + (PMKPromise *)promiseBecome:(NSString *)sessionToken;
+/**
+ Makes a request to login a user with specified credentials. Thens the successfully logged in
+ `PFUser *`. This also caches the user locally so that calls to currentUser will use the latest
+ logged in user.
+ @param username The username of the user
+ @param password The password of the user
+ @return A Promise that thens `PFUser *user`
+ */
 + (PMKPromise *)promiseLogInWithUsername:(NSString *)username password:(NSString *)password;
+/**
+ Send a password reset request for a specified email. If a user account exists with that email, an
+ email will be sent to that address with instructions on how to reset their password. Thens the
+ `NSString *` email.
+ @param email Email of the account to send a reset password request
+ @return A Promise that thens `NSString *email`
+ */
 + (PMKPromise *)promiseRequestPasswordResetForEmail:(NSString *)email;
 
 @end
@@ -85,6 +215,11 @@
 #if PARSE_IOS_ONLY
 @interface PFImageView (PromiseKit)
 
+/**
+ Initiate downloading of the remote image. Once the download completes, the remote image will be
+ displayed. Thens the downloaded `UIImage *`.
+ @return A Promise that thens `UIImage *image`
+ */
 - (PMKPromise *)promiseLoad;
 
 @end
@@ -92,7 +227,18 @@
 
 @interface PFPurchase (PromiseKit)
 
+/**
+ Initiates the purchase for the product. Thens the `NSString *` product identifier.
+ @param productIdentifier the product identifier
+ @return A Promise that thens `NSString *productIdentifier`
+ */
 + (PMKPromise *)promiseBuyProduct:(NSString *)productIdentifier;
+/**
+ Download the purchased asset, which is stored on Parse's server. Parse verifies the receipt with
+ Apple and delivers the content only if the receipt is valid. Thens the `NSString *` file path.
+ @param transaction the transaction, which contains the receipt
+ @return A Promise that thens `NSString *filePath`
+ */
 + (PMKPromise *)promiseDownloadAssetForTransaction:(SKPaymentTransaction *)transaction;
 
 @end
@@ -119,16 +265,16 @@
 
 + (PMKPromise *)promiseLogIn;
 + (PMKPromise *)promiseLogInWithTwitterId:(NSString *)twitterId
-                            screenName:(NSString *)screenName
-                             authToken:(NSString *)authToken
-                       authTokenSecret:(NSString *)authTokenSecret;
+                               screenName:(NSString *)screenName
+                                authToken:(NSString *)authToken
+                          authTokenSecret:(NSString *)authTokenSecret;
 
 + (PMKPromise *)promiseLinkUser:(PFUser *)user;
 + (PMKPromise *)promiseLinkUser:(PFUser *)user
-                   twitterId:(NSString *)twitterId
-                  screenName:(NSString *)screenName
-                   authToken:(NSString *)authToken
-             authTokenSecret:(NSString *)authTokenSecret;
+                      twitterId:(NSString *)twitterId
+                     screenName:(NSString *)screenName
+                      authToken:(NSString *)authToken
+                authTokenSecret:(NSString *)authTokenSecret;
 
 + (PMKPromise *)promiseUnlinkUser:(PFUser *)user;
 
@@ -140,20 +286,20 @@
 
 + (PMKPromise *)promiseLogInWithPermissions:(NSArray *)permissions;
 + (PMKPromise *)promiseLogInWithFacebookId:(NSString *)facebookId
-                            accessToken:(NSString *)accessToken
-                         expirationDate:(NSDate *)expirationDate;
+                               accessToken:(NSString *)accessToken
+                            expirationDate:(NSDate *)expirationDate;
 
 + (PMKPromise *)promiseLinkUser:(PFUser *)user permissions:(NSArray *)permissions;
 + (PMKPromise *)promiseLinkUser:(PFUser *)user
-                  facebookId:(NSString *)facebookId
-                 accessToken:(NSString *)accessToken
-              expirationDate:(NSDate *)expirationDate;
+                     facebookId:(NSString *)facebookId
+                    accessToken:(NSString *)accessToken
+                 expirationDate:(NSDate *)expirationDate;
 
 + (PMKPromise *)promiseUnlinkUser:(PFUser *)user;
 
 + (PMKPromise *)promiseReauthorizeUser:(PFUser *)user
-             withPublishPermissions:(NSArray *)permissions
-                           audience:(FBSessionDefaultAudience)audience;
+                withPublishPermissions:(NSArray *)permissions
+                              audience:(FBSessionDefaultAudience)audience;
 
 @end
 #endif
