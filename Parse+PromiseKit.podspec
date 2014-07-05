@@ -28,5 +28,5 @@ Pod::Spec.new do |s|
   s.dependency 'PromiseKit/base'
   s.dependency 'Parse', '~> 1.2'
 
-  s.xcconfig = { 'HEADER_SEARCH_PATHS' => '"$(PODS_ROOT)/Parse"' }
+  s.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '"$(PODS_ROOT)/Parse"' }
 end
