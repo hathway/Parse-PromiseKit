@@ -34,7 +34,7 @@ becomes
 
 License
 -------
-`Parse+PromiseKit` is free software and is released under the [GPLv2](http://www.gnu.org/licenses/gpl-2.0.html) license.
-See [LICENSE](LICENSE) for more information.
+`Parse+PromiseKit` is free software and is released under the [Apache v2](http://www.apache.org/licenses/LICENSE-2.0.html)
+license. See [LICENSE](LICENSE) for more information.
 
 Copyright &copy; 2014 Hathway Inc.

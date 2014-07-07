@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name        = 'Parse+PromiseKit'
-  s.version     = '0.9.0'
+  s.version     = '0.9.1'
   s.source      = { :git => 'https://github.com/hathway/Parse-PromiseKit.git', :tag => 'v' + s.version.to_s }
   s.summary     = 'A PromiseKit category for the Parse SDK.'
 
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
                   DESC
 
   s.homepage    = 'https://github.com/hathway/Parse-PromiseKit'
-  s.license     = 'GPLv2'
+  s.license     = 'Apache License, Version 2.0'
 
 
   s.authors          = { 'DJ Tarazona' => 'dj@wearehathway.com', 'HATHWAY' => 'hello@wearehathway.com' }
