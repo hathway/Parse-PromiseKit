@@ -5,6 +5,11 @@ Parse+PromiseKit
 
 *Note: The API is subject to change until v1.0.*
 
+Installation
+------------
+### Via CocoaPods
+`pod 'Parse+PromiseKit'`
+
 Usage
 -----
 Method names prefix Parse's asynchronous method names with `promise` and remove `InBackground`, etc. Promises are fulfilled
