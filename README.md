@@ -8,7 +8,7 @@ Parse+PromiseKit
 Installation
 ------------
 ### Via CocoaPods
-`pod 'Parse+PromiseKit'`
+Add `pod 'Parse+PromiseKit'` to your Podfile
 
 Usage
 -----
