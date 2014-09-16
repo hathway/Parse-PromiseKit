@@ -22,18 +22,22 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.7' # Parse-OSX-SDK minimum supported OS X version
 
   s.requires_arc = true
-  s.source_files = 'PMKPFMacros.h'
 
-  s.dependency 'PromiseKit/base'
+  s.default_subspec = 'Parse'
 
-  s.frameworks   = 'Foundation'
+  s.subspec 'Base' do |bs|
+    bs.source_files = 'PMKPFMacros.h'
 
-  s.default_subspec = 'Core'
+    bs.dependency 'PromiseKit/base'
 
-  s.subspec 'Core' do |cs|
+    bs.frameworks = 'Foundation'
+  end
+
+  s.subspec 'Parse' do |cs|
     cs.source_files        = 'Parse+PromiseKit.{h,m}'
     cs.public_header_files = 'Parse+PromiseKit.h'
 
+    cs.dependency 'Parse+PromiseKit/Base'
     cs.ios.dependency 'Parse', '~> 1.3'
     cs.osx.dependency 'Parse-OSX', '~> 1.3'
 
@@ -47,6 +51,7 @@ Pod::Spec.new do |s|
     fs.source_files        = 'ParseFacebookUtils+PromiseKit.{h,m}'
     fs.public_header_files = 'ParseFacebookUtils+PromiseKit.h'
 
+    fs.dependency 'Parse+PromiseKit/Base'
     fs.dependency 'ParseFacebookUtils', '~> 1.3'
 
     fs.ios.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '"$(PODS_ROOT)/ParseFacebookUtils"' }
