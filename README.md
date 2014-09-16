@@ -8,10 +8,15 @@ Parse+PromiseKit
 Installation
 ------------
 ### Via CocoaPods
-Add `pod 'Parse+PromiseKit'` to your Podfile
+Add `pod 'Parse+PromiseKit'` to your Podfile.
+
+The category for [PFFacebookUtils](https://parse.com/docs/ios/api/Classes/PFFacebookUtils.html) is available as a subspec.
+Add `pod 'Parse+PromiseKit/FacebookUtils'` to your Podfile.
 
 Usage
 -----
+Import `Parse+PromiseKit.h` or `ParseFacebookUtils+PromiseKit.h` as appropriate.
+
 Method names prefix Parse's asynchronous method names with `promise` and remove `InBackground`, etc. Promises are fulfilled
 with the same result signature as the appropriate completion block (with a few exceptions).
 
