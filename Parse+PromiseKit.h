@@ -73,14 +73,6 @@
 
 @interface PFObject (PromiseKit)
 
-#if PARSE_IOS_ONLY
-/**
- Refreshes the PFObject with the current data from the server. Thens the refreshed `PFObject *`.
- @return A Promise that thens `PFObject *object`.
- */
-- (PMKPromise *)promiseRefresh;
-#endif
-
 /**
  Fetches the PFObject with the current data from the server. Thens the fetched `PFObject *`.
  @return A Promise that thens `PFObject *object`.
