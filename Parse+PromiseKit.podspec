@@ -39,6 +39,7 @@ Pod::Spec.new do |s|
 
     cs.dependency 'Parse+PromiseKit/Base'
     cs.ios.dependency 'Parse', '~> 1.3'
+    cs.ios.dependency 'ParseUI', '~> 1.1.1'
     cs.osx.dependency 'Parse-OSX', '~> 1.3'
 
     cs.ios.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '"$(PODS_ROOT)/Parse"' }
