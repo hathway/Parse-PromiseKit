@@ -80,15 +80,6 @@
 
 @implementation PFObject (PromiseKit)
 
-#if PARSE_IOS_ONLY
-- (PMKPromise *)promiseRefresh
-{
-    return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
-        [self refreshInBackgroundWithBlock:PMKPFObjectResultBlock];
-    }];
-}
-#endif
-
 - (PMKPromise *)promiseFetch
 {
     return [PMKPromise new:^(PMKPromiseFulfiller fulfiller, PMKPromiseRejecter rejecter) {
