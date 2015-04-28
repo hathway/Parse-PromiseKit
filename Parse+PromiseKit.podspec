@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
   s.subspec 'Base' do |bs|
     bs.source_files = 'PMKPFMacros.h'
 
-    bs.dependency 'PromiseKit/base'
+    bs.dependency 'PromiseKit/base', '~> 1.5'
 
     bs.frameworks = 'Foundation'
   end
